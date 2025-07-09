@@ -15,7 +15,7 @@ function App() {
 
   // Fetch leaderboard on load
   useEffect(() => {
-    fetch(`${API_URL}/leaderboard`)
+    fetch(`${API_URL}leaderboard`)
       .then(res => res.json())
       .then(data => {
         console.log('Leaderboard fetch result:', data);
@@ -33,7 +33,7 @@ function App() {
     const name = e.target.name.value;
     const email = e.target.email.value;
     setMessage("");
-    const res = await fetch(`${API_URL}/user`, {
+    const res = await fetch(`${API_URL}user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email }),
@@ -52,7 +52,7 @@ function App() {
   const fetchSection = async (userId) => {
     setMessage("");
     setSubmitResult(null);
-    const res = await fetch(`${API_URL}/quiz/current?userId=${userId}`);
+    const res = await fetch(`${API_URL}quiz/current?userId=${userId}`);
     if (res.ok) {
       const data = await res.json();
       setSection(data);
@@ -68,7 +68,7 @@ function App() {
           setUser(null);
           setShowCongratulations(false);
           // Refetch leaderboard to show updated scores
-          fetch(`${API_URL}/leaderboard`).then(res => res.json()).then(setLeaderboard);
+          fetch(`${API_URL}leaderboard`).then(res => res.json()).then(setLeaderboard);
         }, 5000);
       } else {
         setMessage("No unlocked section found or you have completed all sections!");
@@ -88,7 +88,7 @@ function App() {
       questionId: q.id,
       selected: selected[q.id] !== undefined ? selected[q.id] : null
     }));
-    const res = await fetch(`${API_URL}/quiz/submit-section`, {
+    const res = await fetch(`${API_URL}quiz/submit-section`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -109,12 +109,12 @@ function App() {
         setUser(null);
         setShowInsufficientScore(false);
         // Refetch leaderboard to show updated scores
-        fetch(`${API_URL}/leaderboard`).then(res => res.json()).then(setLeaderboard);
+        fetch(`${API_URL}leaderboard`).then(res => res.json()).then(setLeaderboard);
       }, 3000);
     }
     
     // Optionally, refetch leaderboard
-    fetch(`${API_URL}/leaderboard`).then(res => res.json()).then(setLeaderboard);
+    fetch(`${API_URL}leaderboard`).then(res => res.json()).then(setLeaderboard);
   };
 
   // Start next section
