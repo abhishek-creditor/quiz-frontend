@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const API_URL = "https://nodejsgame.onrender.com/";
+const API_URL = "https://nodejsgame.onrender.com";
 
 function App() {
   const [step, setStep] = useState("register");
